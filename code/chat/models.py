@@ -21,10 +21,9 @@ class ChatMessage(Base):
     def __repr__(self) -> str:
         return f"Message(id={self.id!r}, text={self.text!r})"
 
-
     @classmethod
     def dialog(cls, session, user1_id: int, user2_id: int):
-        """return dialog between user and user2"""
+        """return dialog between user1 and user2"""
         stmt = (select(ChatMessage)
                 .where((ChatMessage.sender_id == user1_id
                         and ChatMessage.recipient_id == user2_id)

@@ -2,12 +2,13 @@ import logging
 
 from aiohttp import web
 
+import core.config
 from core.socketio import sio
-from core import socketio_handlers
 
 logger = logging.getLogger()
 
 # load handlers
+from core import socketio_handlers
 
 app = web.Application()
 sio.attach(app)
@@ -15,7 +16,7 @@ sio.attach(app)
 
 async def index(request):
     """Serve the client-side application."""
-    with open('index.html') as f:
+    with open('code/index.html') as f:
         return web.Response(text=f.read(), content_type='text/html')
 
 
@@ -33,4 +34,4 @@ def disconnect(sid):
 app.router.add_get('/', index)
 
 if __name__ == '__main__':
-    web.run_app(app)
+    web.run_app(app, port=core.config.SETTINGS.PORT)
