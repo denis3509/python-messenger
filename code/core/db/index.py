@@ -7,10 +7,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.sql.ddl import CreateTable
 
-from core import config
+from core.config import SETTINGS
 
-main_engine = create_engine(URL.create(**config.DATABASE), echo=True)
-
+main_engine =  create_engine(URL.create(**SETTINGS.db_dict()), echo=True)
+print(URL.create(**SETTINGS.db_dict()))
 
 def create_session():
     return Session(main_engine)
