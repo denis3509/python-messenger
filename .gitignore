@@ -2,3 +2,4 @@
 /code/app/venv/
 /code/alembic.ini
 .env
+.idea
