@@ -2,9 +2,9 @@ import logging
 
 from aiohttp import web
 
-import core.config
-from core.socketio import sio
 
+from core.socketio import sio
+from core.config import SETTINGS
 logger = logging.getLogger()
 
 # load handlers
@@ -34,4 +34,4 @@ def disconnect(sid):
 app.router.add_get('/', index)
 
 if __name__ == '__main__':
-    web.run_app(app, port=core.config.SETTINGS.PORT)
+    web.run_app(app, port=SETTINGS.PORT)
