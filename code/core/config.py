@@ -1,14 +1,5 @@
 import os
 
-DATABASE = {
-    'drivername': 'postgresql+psycopg2',
-    'host': 'localhost',
-    'port': '5432',
-    'username': 'denis',
-    'password': 'localpass',
-    'database': 'python_messenger'
-}
-
 
 def env(key, type_, default=None):
     if key not in os.environ:
@@ -19,7 +10,7 @@ def env(key, type_, default=None):
     val = os.environ[key]
 
     if type_ == str:
-        return val
+        return str(val)
     elif type_ == bool:
         if val.lower() in ["1", "true", "yes", "y", "ok", "on"]:
             return True
@@ -39,6 +30,32 @@ def env(key, type_, default=None):
 
 class _Settings:
     PORT: int = env("PORT", int, 8080)
+    PG_DRIVERNAME: str = env("PG_DRIVERNAME", str, 'postgresql+psycopg2')
+    PG_HOST: str = env("PG_HOST", str)
+    PG_PORT: str = env("PG_PORT", str)
+    PG_USERNAME: str = env("PG_USERNAME", str)
+    PG_PASSWORD: str = env("PG_PASSWORD", str)
+    PG_DATABASE: str = env("PG_DATABASE", str)
+
+    def db_dict(self) -> dict:
+        return {
+            'drivername': self.PG_DRIVERNAME,
+            'host': self.PG_HOST,
+            'port': self.PG_PORT,
+            'username': self.PG_USERNAME,
+            'password': self.PG_PASSWORD,
+            'database': self.PG_DATABASE
+        }
+
+    def test_db_dict(self):
+        return {
+            'drivername': self.PG_DRIVERNAME,
+            'host': self.PG_HOST,
+            'port': self.PG_PORT,
+            'username': self.PG_USERNAME,
+            'password': self.PG_PASSWORD,
+            'database': f"test_{self.PG_DATABASE}"
+        }
 
 
 SETTINGS = _Settings()

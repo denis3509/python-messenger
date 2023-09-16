@@ -3,21 +3,22 @@ from faker import Faker
 from sqlalchemy import create_engine, URL
 from sqlalchemy.orm import Session
 
-from core import models as mdl, config
-
+from core import models as mdl
+from core.config import SETTINGS
 
 # https://itnext.io/setting-up-transactional-tests-with-pytest-and-sqlalchemy-b2d726347629
 @pytest.fixture(scope="session")
 def connection():
     print("connection")
-    test_engine = create_engine(URL.create(**dict(config.DATABASE, database=f"test_{config.DATABASE['database']}")))
+
+    test_engine = create_engine(URL.create(**SETTINGS.test_db_dict()))
     return test_engine.connect()
 
 
 @pytest.fixture(scope="session")
 def test_engine():
     print("test_engine")
-    test_engine = create_engine(URL.create(**dict(config.DATABASE, database=f"test_{config.DATABASE['database']}")))
+    test_engine = create_engine(URL.create(**SETTINGS.test_db_dict()))
     return test_engine
 
 
