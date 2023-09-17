@@ -3,3 +3,4 @@
 /code/alembic.ini
 .env
 .idea
+docker-compose.yml

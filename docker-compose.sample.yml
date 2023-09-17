@@ -2,17 +2,17 @@ version: '3.7'
 services:
 
   py-messenger:
-
     restart: always
     container_name: py-messenger
-
     hostname: localhost
-#    image: py-messenger:1.0.0
     network_mode: host
     command: [ "python" ,"code/server.py"]
     build:
       dockerfile: Dockerfile
     environment:
-      PORT: 8082
-
-
+      PORT: 8080
+      PG_HOST: localhost
+      PG_PORT: 5432
+      PG_USERNAME: dbuser
+      PG_PASSWORD: dbpass
+      PG_DATABASE: python_messenger
