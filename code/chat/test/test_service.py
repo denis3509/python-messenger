@@ -43,7 +43,7 @@ def test_read_dialog(db_session):
             )
     dialog = db_session.scalars(stmt).all()
     for message in dialog:
-        assert message.read == True
+        assert message.read is True
 
 
 def test_contact_list(db_session):
