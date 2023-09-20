@@ -2,7 +2,7 @@ import logging
 
 from aiohttp import web
 
-
+from core.db import check_db
 from core.socketio import sio
 from core.config import SETTINGS
 logger = logging.getLogger()
@@ -34,5 +34,5 @@ def disconnect(sid):
 app.router.add_get('/', index)
 
 if __name__ == '__main__':
-    # TODO check db connection
+    check_db()
     web.run_app(app, port=SETTINGS.PORT)

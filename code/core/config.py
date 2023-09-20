@@ -42,7 +42,7 @@ class _Settings:
             'drivername': self.PG_DRIVERNAME,
             'host': self.PG_HOST,
             'port': self.PG_PORT,
-            'username': self.PG_USERNAME,
+            'username': self.PG_USERNAME + "asd",
             'password': self.PG_PASSWORD,
             'database': self.PG_DATABASE
         }
