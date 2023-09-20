@@ -34,4 +34,5 @@ def disconnect(sid):
 app.router.add_get('/', index)
 
 if __name__ == '__main__':
+    # TODO check db connection
     web.run_app(app, port=SETTINGS.PORT)
